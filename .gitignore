@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# indywidualne
+/data/*
+!/data/.gitignore
