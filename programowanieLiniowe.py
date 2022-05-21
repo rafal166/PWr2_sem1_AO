@@ -11,17 +11,16 @@ class przygotowanieDanych:
         self.b_eq = [0 for i in range(iloscKlientow*2)]  #[0]*iloscKlientow*2
         self.macierzParametrowDoOptymalizacji()
         self.macierzOgraniczen()
-        #self.wektorZerowy()
         self.macierzWspolrzednychKlientow()
         self.wektorWspolrzendnychKlientow(dane)
 
-    #c
+    #c chcemy optymalizować (minimalizowac) sumę d1,d2,d3...dn, więc stawiamy 1 w odpowiednim miejscu.
     def macierzParametrowDoOptymalizacji(self):
         for i in range(6,len(self.c),5):
             self.c[i]=1
 
 
-    #A_ub
+    #A_ub każdy punkt wprowadza 5 ograniczen, 5 wierszy do macierzy
     def macierzOgraniczen(self):
         for i in range(self.iloscKlientow):  #kazdy wprowadza 5 ograniczen
             self.A_ub[0+i*5][4+i*5]=1
@@ -44,7 +43,10 @@ class przygotowanieDanych:
             self.A_ub[4+i*5][3+i*5]=1
             self.A_ub[4+i*5][5+i*5]=-1
 
-    #A_eq
+    #A_eq tutaj mamy odniesienie do kompletnej macierzy parametrów która jest równa:
+    # # x_p, y_p, x1, y1, dx1, dy1, d1,   x2, y2, dx2, dy2, d2 itd...
+    # każdy wierz odpowiada jednej '1' i reszcie '0'
+    # no i analogicznie jak do wektora, 1 wierz odpowiada x1, drugi wiersz odpowiada y1 itd...
     def macierzWspolrzednychKlientow(self):
         for i in range(self.iloscKlientow):
             #print(i*2,2+i*5)
@@ -54,7 +56,7 @@ class przygotowanieDanych:
             #self.A_eq[i*2][3+i*5]=1
             #self.A_eq[1+i*2][2+i*5]=1
 
-    #b_eq
+    #b_eq tutaj mamy zapisane bezposciednio x i y, w kolejnosci po prostu x,y,x,y,x,y...
     def wektorWspolrzendnychKlientow(self,dane):
         index=0
         for i in dane:
