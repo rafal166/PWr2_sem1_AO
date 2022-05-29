@@ -4,49 +4,33 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 import csv
-PI = 3.141592653589;
+PI = 3.141592653589
 
-#współrzędne Wrocławia
-wLat = 51.1079
-wLng = 17.0385
-promienWroclawia = 0.8 # zakładam, że taki okrąg to Wrocław
+#współrzędne Wrocławia w stopniach punkt najbardziej na lewo i w dół
+wsp=[51+(0.043413/0.6), 16+(0.552628/0.6)]
 # ile punktów chcemy wygenerować
 N = int(input("Ile punktów wygenerować: "))
 fileName = input("Podaj nazwę pliku w którym zostaną zapisane wygenerowane dane (bez rozszerzenia):\n")
 
-def randPoint2(r, x, y, n):
-    res = list();
-    wsp=[51+(0.043413/0.6), 16+(0.552628/0.6)]
+
+#generowanie punktów na prostokącie
+# do punktu o najmniejszych współrzędnych x i y dodajemy długości tak aby utworzyć prostokąt
+# odpowiednio promien_y i promien_x przemnożony przed random z przedzialu (0,1)
+def randPoint(n):
+    res = list()
     promien_y=(51.085497 - 51.043413)/0.6
     promien_x=(17.064902-17+16.6-16.552628)/0.6
     for i in range(n):
         res.append([
             round(wsp[0]+random.random()*promien_y*0.99, 5),
 			round(wsp[1]+random.random()*promien_x*0.99, 5)
-			 ]);
+			 ])
  
     # Return the N points
-    return res;
-
-def randPoint(r, x, y, n):
-    res = list();
- 
-    for i in range(n):
-        # Get Angle in radians
-        theta = 2 * PI * random.random();
-        # Get length from center
-        len = math.sqrt(random.random()) * r;
-        # Add point to results.
-        res.append([
-			round(x + len * math.cos(theta), 5),
-			round(y + len * math.sin(theta), 5)
-			 ]);
- 
-    # Return the N points
-    return res;
+    return res
 
 # Wywołanie funkcji 
-lista = randPoint2(promienWroclawia, wLat, wLng, N)
+lista = randPoint(N)
 
 # zapisywanie do pliku csv
 header = ['lat', 'lng']
