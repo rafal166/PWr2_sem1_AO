@@ -79,15 +79,16 @@ for i in range(p):
     wsp_paczkomatow_km[i].append(res.x[1])
     #print("Wspolrzedne paczkomatu",str(i),": ",wsp_paczkomatow[i][0],wsp_paczkomatow[i][1])
     #print("Wspolrzedne paczkomatu",str(i),": ",res.x[0],res.x[1])
-
+#obliczenie odleglosci najdalej oddalonych klientow
 odleglosci_od_paczkomatu=[[] for i in range(p)]
 for count,i in enumerate(klastry_km):
     for k in i:
         odleglosci_od_paczkomatu[count].append([abs(k[0]-wsp_paczkomatow_km[count][0])+abs(k[1]-wsp_paczkomatow_km[count][1])])
-
+#znalezienie najdalej oddalonego klienta i wypisane pozostalych danych
 maksymalne_odleglosci=[]
 for i in range(p):
     maksymalne_odleglosci.append(max(odleglosci_od_paczkomatu[i])[0])
     print("Wspolrzedne paczkomatu",str(i),": ",wsp_paczkomatow[i][0],wsp_paczkomatow[i][1]," Odleglosc najdalszego klienta: ",max(odleglosci_od_paczkomatu[i])[0],"km")
 print("Odleglosc najbardziej oddalonego klienta ze wszystkich regionow od paczkomatu wynosi: ",max(maksymalne_odleglosci),"km")
+#plot wynikow
 plot_mapa(klastry_stopnie,wsp_paczkomatow)
