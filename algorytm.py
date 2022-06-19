@@ -8,8 +8,8 @@ p = int(input("Liczba paczkomatow: "))  # liczba paczkomatow
 kolory=["red","green","blue","yellow","orange","purple","beige","brown","gray","cyan","magenta"] 
 dane_stopnie=list()
 dane_km=list()
-stopien_pion=184*0.6   #w duzym zaokragleniu
-stopien_poziom=116*0.6 #w duzym zaokragleniu
+stopien_pion=184*0.6   
+stopien_poziom=116*0.6 
 wsp=[51+(0.043413/0.6), 16+(0.552628/0.6)]
 promien_y=(51.085497 - 51.043413)/0.6
 promien_x=(17.064902-17+16.6-16.552628)/0.6
@@ -20,8 +20,7 @@ mapa = plt.imread("geoMapa_.png")
 #jest rozdzielenie pomiędzy danymi wyrażonymi w stopniach a tych w km, dlaczego?
 #dlatego, iż stopień w pionie nie jest równy (km) stopniowi w poziomie i dlatego podanie 
 #danych w taki sposób do algorytmu skutkowało jego nieprawidłowym działaniem, 
-#dlatego szacowałem z mapki z geoportalu długości które odpowiadają 1 stopniowi dla pionu i poziomu 
-# i powiedzmy że to odpowiednio przeliczyłem, na mapie wygląda dobrze.
+#dlatego zabralem z mapki z geoportalu długości które odpowiadają 1 stopniowi dla pionu i poziomu 
 
 
 #funkcja do plotowania wszystkiegom podajemy:
@@ -36,7 +35,7 @@ def plot_mapa(klaster,wsp_paczkomatu):
     #print(mapa.shape)
     for i,klaster_ in enumerate(klaster):
         for pkt in klaster_:
-            plt.scatter(y=((pkt[0]-wsp_y[0])/(wsp_y[1]-wsp_y[0])*mapa.shape[0]),x=((pkt[1]-wsp_x[0])/(wsp_x[1]-wsp_x[0])*mapa.shape[1]),color =kolory[i%len(kolory)])
+            plt.scatter(y=((pkt[0]-wsp_y[0])/(wsp_y[1]-wsp_y[0])*mapa.shape[0]),x=((pkt[1]-wsp_x[0])/(wsp_x[1]-wsp_x[0])*mapa.shape[1]),color =kolory[i%len(kolory)],s=10)
         plt.scatter(y=((wsp_paczkomatu[i][0]-wsp_y[0])/(wsp_y[1]-wsp_y[0])*mapa.shape[0]),x=((wsp_paczkomatu[i][1]-wsp_x[0])/(wsp_x[1]-wsp_x[0])*mapa.shape[1]),color ="black")
     #plt.gca().set_aspect('equal')
     plt.show()
